@@ -141,3 +141,23 @@ grid-template-columns: 1fr;
   width: 50%;
   border-radius: 10px;
 }
+
+.reviews-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.stars span {
+  font-size: 25px;
+  cursor: pointer;
+  color: gray;
+}
+
+.stars span.active {
+  color: gold;
+}
+
+.review {
+  border-bottom: 1px solid #ccc;
+  margin-top: 10px;
+}
