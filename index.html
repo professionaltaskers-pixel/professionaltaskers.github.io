@@ -87,7 +87,7 @@ Our rates are flexible and tailored to your needs. Contact us today for a fair q
   </form>
 
   <div id="reviewsList"></div>
-</div>	
+</div>
 
 <section id="contact">
 <h2>Contact Us</h2>
@@ -106,6 +106,84 @@ Our rates are flexible and tailored to your needs. Contact us today for a fair q
 <footer>
 <p>© 2026 Professional Tasker's</p>
 </footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// 🔴 PASTE YOUR CONFIG HERE
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let selectedRating = 0;
+
+// ⭐ Star selection
+document.querySelectorAll(".stars span").forEach(star => {
+  star.addEventListener("click", function () {
+    selectedRating = this.getAttribute("data-value");
+
+    document.querySelectorAll(".stars span").forEach(s => s.classList.remove("active"));
+    for (let i = 0; i < selectedRating; i++) {
+      document.querySelectorAll(".stars span")[i].classList.add("active");
+    }
+  });
+});
+
+// 📥 Load reviews
+async function loadReviews() {
+  const querySnapshot = await getDocs(collection(db, "reviews"));
+  const container = document.getElementById("reviewsList");
+  container.innerHTML = "";
+
+  querySnapshot.forEach((doc) => {
+    const r = doc.data();
+    const div = document.createElement("div");
+    div.classList.add("review");
+    div.innerHTML = `
+      <strong>${r.name}</strong> - ${"★".repeat(r.rating)}
+      <p>${r.comment}</p>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// 📤 Submit review
+document.getElementById("reviewForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const comment = document.getElementById("comment").value;
+
+  if (selectedRating == 0) {
+    alert("Please select a rating");
+    return;
+  }
+
+  await addDoc(collection(db, "reviews"), {
+    name,
+    comment,
+    rating: selectedRating,
+    timestamp: Date.now()
+  });
+
+  this.reset();
+  selectedRating = 0;
+  document.querySelectorAll(".stars span").forEach(s => s.classList.remove("active"));
+
+  loadReviews();
+});
+
+// Initial load
+loadReviews();
+</script>
 
 </body>
 </html>
