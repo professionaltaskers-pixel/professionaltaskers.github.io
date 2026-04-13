@@ -156,14 +156,14 @@ grid-template-columns: 1fr;
 }
 
 .services-title {
-  text-align: center;
+  text-align: top center;
   margin-bottom: 30px;
   color: #00c853; /* green accent */
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
@@ -171,7 +171,7 @@ grid-template-columns: 1fr;
   display: flex;
   align-items: center;
   background: #1c1c1c;
-  border-radius: 15px;
+  border-radius: 20px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
