@@ -44,9 +44,13 @@ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 gap: 10px;
 }
 
+/* Make gallery thumbnails a consistent height and use object-fit so they crop uniformly */
 .gallery img {
 width: 100%;
+height: 200px;
+object-fit: cover;
 border-radius: 8px;
+display: block;
 }
 
 .contact-buttons {
@@ -129,7 +133,9 @@ grid-template-columns: 1fr;
 }
 
 .services-video video {
-  width: 50%;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -148,10 +154,11 @@ grid-template-columns: 1fr;
   color: gold;
 }
 
+/* Consolidated services container styles and fixed a color typo */
 .services-container {
   padding: 50px 20px;
   background: #ffffff; /* white background */
-  color: #fffff;
+  color: #000000;
 }
 
 .services-title {
@@ -182,6 +189,7 @@ grid-template-columns: 1fr;
   box-shadow: 0 0 15px rgba(0, 200, 83, 0.4);
 }
 
+/* Keep service card images narrower but match height with gallery thumbnails */
 .service-card img {
   width: 130px;
   height: 200px;
@@ -206,4 +214,12 @@ grid-template-columns: 1fr;
 .review {
   border-bottom: 1px solid #ccc;
   margin-top: 10px;
+}
+
+/* Ensure any review/user images also follow the same thumbnail sizing */
+.reviews-container img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
 }
