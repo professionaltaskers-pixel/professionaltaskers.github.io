@@ -219,6 +219,27 @@ grid-template-columns: 1fr;
   margin-top: 10px;
 }
 
+/* ========================================
+   SERVICE PAGE IMAGES
+   Keeps sheds, gazebos, greenhouses, etc.
+   the same display size
+======================================== */
+
+.service-hero-img {
+    width: 330px;
+    height: 330px;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .service-hero-img {
+        width: 100%;
+        max-width: 330px;
+        height: 330px;
+    }
+}
+
 /* Ensure any review/user images also follow the same thumbnail sizing */
 .reviews-container img {
   width: 100%;
